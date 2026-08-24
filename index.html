@@ -200,6 +200,22 @@
         .card:nth-child(2) .card-top::before { background-image: url("https://files.catbox.moe/xg9kwq.jpg"); }
         .card:nth-child(3) .card-top::before { background-image: url("https://files.catbox.moe/xg9kwq.jpg"); }
         .card:nth-child(4) .card-top::before { background-image: url("https://files.catbox.moe/xg9kwq.jpg"); }
+        .card:nth-child(5) .card-top::before { background-image: url("https://files.catbox.moe/1wjocc.jpeg"); }
+
+        .card-badge {
+            position: absolute;
+            top: 10px; left: 10px;
+            z-index: 2;
+            background: var(--green-soft);
+            border: 1px solid rgba(126, 184, 154, 0.3);
+            color: var(--green);
+            font-size: 10px; font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 20px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            backdrop-filter: blur(4px);
+        }
 
         .card-icon {
             width: 100px; height: 100px;
@@ -618,6 +634,25 @@
                 </div>
             </div>
         </div>
+        <!-- 5 - mio cpanel -->
+        <div class="card">
+            <div class="card-top">
+                <span class="card-badge"><i class="fas fa-bolt"></i> MURAH</span>
+                <div class="card-icon"><img src="https://files.catbox.moe/1wjocc.jpeg" alt=""></div>
+            </div>
+            <div class="card-body">
+                <h3>mio cpanel</h3>
+                <p>Panel Pterodactyl murah dengan server stabil & performa mantap. Cocok buat hosting bot & project kamu. Bisa diperpanjang kapan aja, order langsung via bot!</p>
+                <div class="card-btns">
+                    <a href="https://t.me/mio_toko_online_bot" target="_blank" class="btn btn-primary" onclick="showToast('Membuka bot...')">
+                        <i class="fab fa-telegram-plane"></i> order bot
+                    </a>
+                    <button class="btn btn-ghost" onclick="openModal('https://files.catbox.moe/1wjocc.jpeg')">
+                        <i class="fas fa-image"></i> Lihat
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="spacer"></div>
@@ -641,7 +676,7 @@
             <div class="dev-bio">Bikin tools simpel yang beneran kepake. Nggak muluk, yang penting work.</div>
             <div class="dev-stats">
                 <div class="dev-stat">
-                    <div class="num">4</div>
+                    <div class="num">5</div>
                     <div class="lbl">Produk</div>
                 </div>
                 <div class="dev-stat">
