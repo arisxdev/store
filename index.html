@@ -2,10 +2,10 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <!-- FIX A11Y: user-scalable=no & maximum-scale DIHAPUS -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Mio Store</title>
-    <link rel="icon" type="image/x-icon" href="https://files.catbox.moe/alahc5.jpeg">
+    <!-- PATCH A: favicon inline — 0 request eksternal -->
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🌸%3C/text%3E%3C/svg%3E">
     <meta name="description" content="Download aplikasi Mio Official ID dan berbagai aplikasi premium lainnya. Update terbaru dan fitur terbaik tersedia di Mio Store.">
     <meta name="theme-color" content="#faf7f2">
     <meta property="og:type" content="website">
@@ -17,15 +17,16 @@
     <meta property="twitter:description" content="Download aplikasi Mio Official ID dan berbagai aplikasi premium lainnya.">
     <meta property="twitter:image" content="https://files.catbox.moe/alahc5.jpeg">
 
-    <!-- PERF: preconnect (cdnjs DIHAPUS — Font Awesome sudah tidak dipakai) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- PATCH B: preconnect (Google Fonts & cdnjs SUDAH DIHAPUS) -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     <link rel="preconnect" href="https://wsrv.nl">
     <link rel="preconnect" href="https://files.catbox.moe">
 
-    <!-- PERF: font non-render-blocking, weight dipangkas -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&family=Caveat&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&family=Caveat&display=swap" rel="stylesheet"></noscript>
+    <!-- PATCH B: font self-host dari jsdelivr — preload paralel sejak detik 0 -->
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="https://cdn.jsdelivr.net/fontsource/fonts/plus-jakarta-sans@latest/latin-400-normal.woff2">
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="https://cdn.jsdelivr.net/fontsource/fonts/plus-jakarta-sans@latest/latin-700-normal.woff2">
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="https://cdn.jsdelivr.net/fontsource/fonts/plus-jakarta-sans@latest/latin-800-normal.woff2">
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="https://cdn.jsdelivr.net/fontsource/fonts/caveat@latest/latin-400-normal.woff2">
 
     <script type="application/ld+json">
     {
@@ -47,6 +48,12 @@
     </script>
 
     <style>
+        /* PATCH B: @font-face self-host */
+        @font-face{font-family:'Plus Jakarta Sans';font-style:normal;font-weight:400;font-display:swap;src:url(https://cdn.jsdelivr.net/fontsource/fonts/plus-jakarta-sans@latest/latin-400-normal.woff2) format('woff2')}
+        @font-face{font-family:'Plus Jakarta Sans';font-style:normal;font-weight:700;font-display:swap;src:url(https://cdn.jsdelivr.net/fontsource/fonts/plus-jakarta-sans@latest/latin-700-normal.woff2) format('woff2')}
+        @font-face{font-family:'Plus Jakarta Sans';font-style:normal;font-weight:800;font-display:swap;src:url(https://cdn.jsdelivr.net/fontsource/fonts/plus-jakarta-sans@latest/latin-800-normal.woff2) format('woff2')}
+        @font-face{font-family:'Caveat';font-style:normal;font-weight:400;font-display:swap;src:url(https://cdn.jsdelivr.net/fontsource/fonts/caveat@latest/latin-400-normal.woff2) format('woff2')}
+
         :root {
             --paper: #faf7f2;
             --card: #ffffff;
@@ -88,13 +95,11 @@
         ::selection { background: var(--accent); color: #fff; }
         section { scroll-margin-top: 84px; }
 
-        /* ikon SVG inline (pengganti Font Awesome) */
         .ic { display:inline-block; width:1em; height:1em; fill:currentColor; vertical-align:-0.125em; flex-shrink:0; }
 
         .reveal { opacity: 0; transform: translateY(16px); transition: opacity .55s ease, transform .55s ease; }
         .reveal.in { opacity: 1; transform: none; }
 
-        /* PERF + A11Y: hormati preferensi reduce motion */
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after { animation: none !important; transition: none !important; }
             html { scroll-behavior: auto; }
@@ -387,7 +392,7 @@
             display: inline-block;
             font-size: 10.5px; font-weight: 800;
             text-transform: uppercase; letter-spacing: 1px;
-            color: #a34425; /* A11Y: kontras lebih kuat */
+            color: #a34425;
             background: var(--accent-soft);
             padding: 4px 11px; border-radius: 999px;
             margin-bottom: 9px;
@@ -405,7 +410,7 @@
 
         .prod-btns { display: flex; gap: 8px; }
         .btn {
-            flex: 1; padding: 11px 0; /* A11Y: tap target lebih besar */
+            flex: 1; padding: 11px 0;
             border-radius: 11px;
             font-family: inherit;
             font-size: 12px; font-weight: 700;
@@ -427,7 +432,10 @@
         .btn-line:hover { border-style: solid; border-color: var(--ink); color: var(--ink); }
 
         /* ===== DEV PROFILE ===== */
+        /* PATCH C: skip render selama belum kelihatan */
         .dev {
+            content-visibility: auto;
+            contain-intrinsic-size: auto 560px;
             margin: 8px 16px 0;
             border-radius: 22px; overflow: hidden;
             position: relative; min-height: 350px;
@@ -476,7 +484,7 @@
         }
         .dev-stats {
             display: flex; width: 100%;
-            background: rgba(255,255,255,.85); /* A11Y: lebih solid */
+            background: rgba(255,255,255,.85);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(255,255,255,.95);
@@ -489,7 +497,7 @@
         .dev-stat .lbl {
             font-size: 9.5px; font-weight: 800;
             letter-spacing: 1.2px; text-transform: uppercase;
-            color: #57504a; /* A11Y: lebih gelap */
+            color: #57504a;
             margin-top: 3px;
         }
         .dev-socials { display: flex; gap: 10px; }
@@ -744,7 +752,6 @@
         </div>
         <div class="polacar" id="carouselContainer">
             <div class="polacar-track" id="carouselTrack">
-                <!-- PERF: gambar dikompres otomatis via wsrv.nl (WebP + resize) -->
                 <figure class="pola"><span class="tape" aria-hidden="true"></span><img src="https://wsrv.nl/?url=https://files.catbox.moe/fnql1z.jpeg&w=344&h=300&fit=cover&we&output=webp&q=75" alt="Foto admin Mio 1" width="344" height="300" loading="eager" fetchpriority="high" decoding="async"><figcaption>Mio 1</figcaption></figure>
                 <figure class="pola"><span class="tape" aria-hidden="true"></span><img src="https://wsrv.nl/?url=https://files.catbox.moe/i0o2ws.jpeg&w=344&h=300&fit=cover&we&output=webp&q=75" alt="Foto admin Mio 2" width="344" height="300" loading="eager" decoding="async"><figcaption>Mio 2</figcaption></figure>
                 <figure class="pola"><span class="tape" aria-hidden="true"></span><img src="https://wsrv.nl/?url=https://files.catbox.moe/p5e341.jpeg&w=344&h=300&fit=cover&we&output=webp&q=75" alt="Foto admin Mio 3" width="344" height="300" loading="lazy" decoding="async"><figcaption>Mio 3</figcaption></figure>
