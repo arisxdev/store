@@ -2,7 +2,8 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- FIX A11Y: user-scalable=no & maximum-scale DIHAPUS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Mio Store</title>
     <link rel="icon" type="image/x-icon" href="https://files.catbox.moe/alahc5.jpeg">
     <meta name="description" content="Download aplikasi Mio Official ID dan berbagai aplikasi premium lainnya. Update terbaru dan fitur terbaik tersedia di Mio Store.">
@@ -16,19 +17,16 @@
     <meta property="twitter:description" content="Download aplikasi Mio Official ID dan berbagai aplikasi premium lainnya.">
     <meta property="twitter:image" content="https://files.catbox.moe/alahc5.jpeg">
 
-    <!-- ===== PERF: preconnect ===== -->
+    <!-- PERF: preconnect (cdnjs DIHAPUS — Font Awesome sudah tidak dipakai) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-    <link rel="preconnect" href="https://files.catbox.moe" crossorigin>
+    <link rel="preconnect" href="https://wsrv.nl">
+    <link rel="preconnect" href="https://files.catbox.moe">
 
-    <!-- ===== PERF: CSS font jadi non-render-blocking ===== -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Caveat:wght@600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Caveat:wght@600;700&display=swap" rel="stylesheet"></noscript>
+    <!-- PERF: font non-render-blocking, weight dipangkas -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&family=Caveat&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&family=Caveat&display=swap" rel="stylesheet"></noscript>
 
-    <!-- ===== A11Y/AGENTIC: structured data ===== -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -53,14 +51,14 @@
             --paper: #faf7f2;
             --card: #ffffff;
             --ink: #27221d;
-            --muted: #6b6358;          /* A11Y: dipertegas, lolos kontras 4.5:1 */
-            --faint: #6e675c;          /* A11Y: dipertegas */
+            --muted: #6b6358;
+            --faint: #6e675c;
             --line: rgba(39,34,29,.09);
-            --accent: #e07856;         /* dekoratif: garis, shadow, gradasi */
-            --accent-strong: #b04e2e;  /* A11Y: tombol & teks oranye, lolos kontras */
+            --accent: #e07856;
+            --accent-strong: #b04e2e;
             --accent-soft: rgba(224,120,86,.1);
-            --green: #3f8f6c;          /* dekoratif */
-            --green-text: #2e7355;     /* A11Y: teks hijau, lolos kontras */
+            --green: #3f8f6c;
+            --green-text: #2e7355;
             --green-soft: rgba(63,143,108,.12);
             --yellow: #f6c453;
             --r: 18px;
@@ -76,11 +74,8 @@
             padding-bottom: 100px;
             overflow-x: hidden;
         }
-
-        /* A11Y: fokus keyboard terlihat */
         :focus-visible { outline: 2.5px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
 
-        /* grain halus — kesan kertas */
         body::before {
             content: '';
             position: fixed; inset: 0;
@@ -91,12 +86,19 @@
         }
 
         ::selection { background: var(--accent); color: #fff; }
-        .hand { font-family: 'Caveat', cursive; }
         section { scroll-margin-top: 84px; }
 
-        /* animasi reveal saat scroll */
+        /* ikon SVG inline (pengganti Font Awesome) */
+        .ic { display:inline-block; width:1em; height:1em; fill:currentColor; vertical-align:-0.125em; flex-shrink:0; }
+
         .reveal { opacity: 0; transform: translateY(16px); transition: opacity .55s ease, transform .55s ease; }
         .reveal.in { opacity: 1; transform: none; }
+
+        /* PERF + A11Y: hormati preferensi reduce motion */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation: none !important; transition: none !important; }
+            html { scroll-behavior: auto; }
+        }
 
         /* ===== HEADER ===== */
         header {
@@ -185,7 +187,7 @@
 
         .chip {
             font-family: inherit; font-size: 12px; font-weight: 700;
-            padding: 9px 16px; border-radius: 999px;
+            padding: 10px 16px; border-radius: 999px;
             border: 1.5px solid var(--ink);
             background: transparent; color: var(--ink);
             cursor: pointer; transition: .18s ease;
@@ -193,7 +195,6 @@
         .chip:hover { transform: translateY(-2px); }
         .chip-solid { background: var(--ink); color: #fff; }
 
-        /* doodle bintang melayang */
         .doodle {
             position: absolute; right: 24px; top: 104px;
             opacity: .55; pointer-events: none;
@@ -204,7 +205,7 @@
             50% { transform: translateY(-9px) rotate(6deg); }
         }
 
-        /* ===== TICKER MIRING ===== */
+        /* ===== TICKER ===== */
         .ticker {
             margin: 30px 0 0;
             width: 110%; margin-left: -5%;
@@ -213,10 +214,7 @@
             overflow: hidden; padding: 10px 0;
         }
         .ticker:hover .ticker-track { animation-play-state: paused; }
-        .ticker-track {
-            display: flex; width: max-content;
-            animation: tick 28s linear infinite;
-        }
+        .ticker-track { display: flex; width: max-content; animation: tick 28s linear infinite; }
         .ticker-track span {
             white-space: nowrap;
             font-size: 12px; font-weight: 700;
@@ -266,9 +264,9 @@
         @keyframes eq { 0%,100%{transform:scaleY(.25)} 50%{transform:scaleY(1)} }
 
         .play-btn {
-            width: 40px; height: 40px; border-radius: 50%;
+            width: 42px; height: 42px; border-radius: 50%;
             background: var(--ink); color: #fff;
-            border: none; font-size: 13px; cursor: pointer;
+            border: none; font-size: 14px; cursor: pointer;
             display: grid; place-items: center;
             flex-shrink: 0; transition: .15s ease;
         }
@@ -313,7 +311,7 @@
         }
         .pola:nth-child(even) { transform: rotate(2.1deg); }
         .pola:hover { transform: rotate(0) translateY(-5px); }
-        .pola img { width: 172px; height: 150px; object-fit: cover; border-radius: 4px; display: block; }
+        .pola img { width: 172px; height: 150px; object-fit: cover; border-radius: 4px; display: block; background: var(--paper); }
         .pola figcaption {
             font-family: 'Caveat', cursive;
             font-size: 19px; text-align: center;
@@ -377,7 +375,7 @@
         .sticker {
             position: absolute; top: -10px; right: 14px; z-index: 3;
             font-family: 'Caveat', cursive;
-            font-size: 17px; font-weight: 700;
+            font-size: 17px;
             color: var(--ink);
             background: var(--yellow);
             padding: 3px 13px; border-radius: 999px;
@@ -389,7 +387,7 @@
             display: inline-block;
             font-size: 10.5px; font-weight: 800;
             text-transform: uppercase; letter-spacing: 1px;
-            color: var(--accent-strong);
+            color: #a34425; /* A11Y: kontras lebih kuat */
             background: var(--accent-soft);
             padding: 4px 11px; border-radius: 999px;
             margin-bottom: 9px;
@@ -407,7 +405,7 @@
 
         .prod-btns { display: flex; gap: 8px; }
         .btn {
-            flex: 1; padding: 10px 0;
+            flex: 1; padding: 11px 0; /* A11Y: tap target lebih besar */
             border-radius: 11px;
             font-family: inherit;
             font-size: 12px; font-weight: 700;
@@ -415,6 +413,7 @@
             display: inline-flex; align-items: center; justify-content: center; gap: 6px;
             transition: .18s ease; text-decoration: none;
         }
+        .btn .ic { font-size: 13px; }
         .btn-solid {
             background: var(--accent-strong); color: #fff;
             box-shadow: 0 4px 12px rgba(224,120,86,.35);
@@ -477,7 +476,7 @@
         }
         .dev-stats {
             display: flex; width: 100%;
-            background: rgba(255,255,255,.72);
+            background: rgba(255,255,255,.85); /* A11Y: lebih solid */
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(255,255,255,.95);
@@ -486,11 +485,12 @@
         }
         .dev-stat { flex: 1; padding: 11px 0; }
         .dev-stat + .dev-stat { border-left: 1px dashed rgba(39,34,29,.14); }
-        .dev-stat .num { font-family: 'Caveat', cursive; font-size: 27px; font-weight: 700; line-height: 1; }
+        .dev-stat .num { font-family: 'Caveat', cursive; font-size: 27px; line-height: 1; }
         .dev-stat .lbl {
             font-size: 9.5px; font-weight: 800;
             letter-spacing: 1.2px; text-transform: uppercase;
-            color: var(--muted); margin-top: 3px;
+            color: #57504a; /* A11Y: lebih gelap */
+            margin-top: 3px;
         }
         .dev-socials { display: flex; gap: 10px; }
         .dev-social-btn {
@@ -499,7 +499,7 @@
             background: rgba(255,255,255,.78);
             border: 1px solid rgba(39,34,29,.1);
             display: grid; place-items: center;
-            color: var(--ink); font-size: 15px;
+            color: var(--ink); font-size: 17px;
             cursor: pointer; text-decoration: none;
             transition: .18s ease;
             backdrop-filter: blur(6px);
@@ -511,7 +511,10 @@
         }
 
         /* ===== FOOTER ===== */
-        footer { padding: 36px 20px 28px; text-align: center; }
+        footer {
+            padding: 36px 20px 28px; text-align: center;
+            content-visibility: auto; contain-intrinsic-size: auto 130px;
+        }
         .foot-hand {
             font-family: 'Caveat', cursive;
             font-size: 20px;
@@ -537,11 +540,11 @@
             position: absolute; top: 14px; right: 16px;
             width: 38px; height: 38px; border-radius: 50%;
             background: rgba(255,255,255,.14); color: #fff;
-            font-size: 20px;
             display: grid; place-items: center;
             cursor: pointer; transition: .15s ease; z-index: 3001;
         }
         .close-x:hover { background: rgba(255,255,255,.28); }
+        .close-x .ic { font-size: 18px; }
 
         .sheet {
             background: var(--card);
@@ -577,15 +580,14 @@
             transition: .16s ease;
         }
         .link-row:hover { border-color: var(--ink); transform: translateX(4px); }
-        .link-row > i { font-size: 16px; width: 20px; text-align: center; flex-shrink: 0; }
+        .link-row > .ic { font-size: 16px; width: 20px; text-align: center; flex-shrink: 0; }
         .link-row .wa { color: var(--green-text); }
-        .link-row .tt { color: var(--ink); }
         .link-row a {
             flex: 1; color: var(--ink); text-decoration: none;
-            font-size: 12.5px; font-weight: 600;
+            font-size: 12.5px; font-weight: 700;
             white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
         }
-        .link-row .arr { color: var(--faint); font-size: 11px; flex-shrink: 0; }
+        .link-row .arr { color: var(--faint); font-size: 12px; flex-shrink: 0; }
 
         .photo {
             background: #fff;
@@ -623,10 +625,10 @@
             display: flex; flex-direction: column; align-items: center; gap: 2px;
             font-size: 10px; font-weight: 800;
             color: var(--faint);
-            padding: 7px 18px; border-radius: 999px;
+            padding: 8px 18px; border-radius: 999px;
             cursor: pointer; transition: .18s ease;
         }
-        .nav-tab i { font-size: 15px; }
+        .nav-tab .ic { font-size: 16px; }
         .nav-tab.active { background: var(--ink); color: #fff; }
 
         /* ===== TOAST ===== */
@@ -635,7 +637,7 @@
             transform: translateX(-50%) translateY(14px);
             background: var(--ink); color: #fff;
             padding: 11px 19px; border-radius: 999px;
-            font-size: 12px; font-weight: 600;
+            font-size: 12px; font-weight: 700;
             opacity: 0; visibility: hidden;
             transition: .25s ease; z-index: 2000;
             display: flex; align-items: center; gap: 8px;
@@ -643,11 +645,31 @@
             box-shadow: 0 12px 30px rgba(0,0,0,.28);
         }
         .toast.show { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
+        .toast .ic { font-size: 13px; color: #7eb89a; }
 
         .spacer { height: 18px; }
     </style>
 </head>
 <body>
+
+    <!-- ===== SPRITE IKON SVG (pengganti Font Awesome — 0 request) ===== -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+        <symbol id="i-bell" viewBox="0 0 24 24"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/></symbol>
+        <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></symbol>
+        <symbol id="i-pause" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></symbol>
+        <symbol id="i-x" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></symbol>
+        <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></symbol>
+        <symbol id="i-external" viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></symbol>
+        <symbol id="i-image" viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></symbol>
+        <symbol id="i-home" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></symbol>
+        <symbol id="i-box" viewBox="0 0 24 24"><path d="M20 2H4c-1 0-2 .9-2 2v3.01c0 .72.43 1.34 1 1.69V20c0 1.1 1.1 2 2 2h14c.9 0 2-.9 2-2V8.7c.57-.35 1-.97 1-1.69V4c0-1.1-1-2-2-2zm-5 12H9v-2h6v2zm5-7H4V4h16v3z"/></symbol>
+        <symbol id="i-code" viewBox="0 0 24 24"><path d="M9.4 16.6 4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0 4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></symbol>
+        <symbol id="i-check" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></symbol>
+        <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></symbol>
+        <symbol id="i-telegram" viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></symbol>
+        <symbol id="i-whatsapp" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413"/></symbol>
+        <symbol id="i-tiktok" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></symbol>
+    </svg>
 
     <header>
         <div class="logo">
@@ -657,10 +679,9 @@
                 <small>toko buatan sendiri</small>
             </div>
         </div>
-        <!-- A11Y: role + nama + bisa keyboard -->
         <div class="bell-btn" onclick="openInfoModal()" onkeydown="keyOpen(event, openInfoModal)"
              role="button" tabindex="0" aria-label="Buka informasi toko">
-            <i class="fas fa-bell" aria-hidden="true"></i>
+            <svg class="ic" aria-hidden="true"><use href="#i-bell"></use></svg>
             <span class="dot" aria-hidden="true"></span>
         </div>
     </header>
@@ -685,7 +706,6 @@
         </div>
     </section>
 
-    <!-- TICKER (dekoratif, disembunyikan dari screen reader) -->
     <div class="ticker" aria-hidden="true">
         <div class="ticker-track">
             <span>&nbsp;panel pterodactyl murah&nbsp;✦&nbsp;bisa diperpanjang kapan aja&nbsp;✦&nbsp;bot downloader tiktok&nbsp;✦&nbsp;am premium gratis&nbsp;✦&nbsp;order langsung via telegram&nbsp;✦&nbsp;admin fast respon&nbsp;✦&nbsp;</span>
@@ -704,9 +724,8 @@
             <span></span><span></span><span></span><span></span>
         </div>
         <button class="play-btn" id="playBtn" onclick="toggleMusic()" aria-label="Putar musik">
-            <i class="fas fa-play" id="playIcon" aria-hidden="true"></i>
+            <svg class="ic" aria-hidden="true"><use id="playUse" href="#i-play"></use></svg>
         </button>
-        <!-- PERF: audio tidak di-download sampai diputar -->
         <audio id="bgMusic" loop preload="none">
             <source src="https://files.catbox.moe/7k68lw.mp3" type="audio/mpeg">
         </audio>
@@ -725,16 +744,17 @@
         </div>
         <div class="polacar" id="carouselContainer">
             <div class="polacar-track" id="carouselTrack">
-                <figure class="pola"><span class="tape" aria-hidden="true"></span><img src="https://files.catbox.moe/fnql1z.jpeg" alt="Foto admin Mio 1" width="344" height="300" loading="eager" decoding="async"><figcaption>Mio 1</figcaption></figure>
-                <figure class="pola"><span class="tape" aria-hidden="true"></span><img src="https://files.catbox.moe/i0o2ws.jpeg" alt="Foto admin Mio 2" width="344" height="300" loading="lazy" decoding="async"><figcaption>Mio 2</figcaption></figure>
-                <figure class="pola"><span class="tape" aria-hidden="true"></span><img src="https://files.catbox.moe/p5e341.jpeg" alt="Foto admin Mio 3" width="344" height="300" loading="lazy" decoding="async"><figcaption>Mio 3</figcaption></figure>
-                <figure class="pola"><span class="tape" aria-hidden="true"></span><img src="https://files.catbox.moe/ivli2m.jpeg" alt="Foto admin Mio 4" width="344" height="300" loading="lazy" decoding="async"><figcaption>Mio 4</figcaption></figure>
-                <figure class="pola"><span class="tape" aria-hidden="true"></span><img src="https://files.catbox.moe/cff3i3.jpeg" alt="Foto admin Mio 5" width="344" height="300" loading="lazy" decoding="async"><figcaption>Mio 5</figcaption></figure>
-                <figure class="pola"><span class="tape" aria-hidden="true"></span><img src="https://files.catbox.moe/fnql1z.jpeg" alt="Foto admin Mio 1" width="344" height="300" loading="lazy" decoding="async"><figcaption>Mio 1</figcaption></figure>
-                <figure class="pola"><span class="tape" aria-hidden="true"></span><img src="https://files.catbox.moe/i0o2ws.jpeg" alt="Foto admin Mio 2" width="344" height="300" loading="lazy" decoding="async"><figcaption>Mio 2</figcaption></figure>
-                <figure class="pola"><span class="tape" aria-hidden="true"></span><img src="https://files.catbox.moe/p5e341.jpeg" alt="Foto admin Mio 3" width="344" height="300" loading="lazy" decoding="async"><figcaption>Mio 3</figcaption></figure>
-                <figure class="pola"><span class="tape" aria-hidden="true"></span><img src="https://files.catbox.moe/ivli2m.jpeg" alt="Foto admin Mio 4" width="344" height="300" loading="lazy" decoding="async"><figcaption>Mio 4</figcaption></figure>
-                <figure class="pola"><span class="tape" aria-hidden="true"></span><img src="https://files.catbox.moe/cff3i3.jpeg" alt="Foto admin Mio 5" width="344" height="300" loading="lazy" decoding="async"><figcaption>Mio 5</figcaption></figure>
+                <!-- PERF: gambar dikompres otomatis via wsrv.nl (WebP + resize) -->
+                <figure class="pola"><span class="tape" aria-hidden="true"></span><img src="https://wsrv.nl/?url=https://files.catbox.moe/fnql1z.jpeg&w=344&h=300&fit=cover&we&output=webp&q=75" alt="Foto admin Mio 1" width="344" height="300" loading="eager" fetchpriority="high" decoding="async"><figcaption>Mio 1</figcaption></figure>
+                <figure class="pola"><span class="tape" aria-hidden="true"></span><img src="https://wsrv.nl/?url=https://files.catbox.moe/i0o2ws.jpeg&w=344&h=300&fit=cover&we&output=webp&q=75" alt="Foto admin Mio 2" width="344" height="300" loading="eager" decoding="async"><figcaption>Mio 2</figcaption></figure>
+                <figure class="pola"><span class="tape" aria-hidden="true"></span><img src="https://wsrv.nl/?url=https://files.catbox.moe/p5e341.jpeg&w=344&h=300&fit=cover&we&output=webp&q=75" alt="Foto admin Mio 3" width="344" height="300" loading="lazy" decoding="async"><figcaption>Mio 3</figcaption></figure>
+                <figure class="pola"><span class="tape" aria-hidden="true"></span><img src="https://wsrv.nl/?url=https://files.catbox.moe/ivli2m.jpeg&w=344&h=300&fit=cover&we&output=webp&q=75" alt="Foto admin Mio 4" width="344" height="300" loading="lazy" decoding="async"><figcaption>Mio 4</figcaption></figure>
+                <figure class="pola"><span class="tape" aria-hidden="true"></span><img src="https://wsrv.nl/?url=https://files.catbox.moe/cff3i3.jpeg&w=344&h=300&fit=cover&we&output=webp&q=75" alt="Foto admin Mio 5" width="344" height="300" loading="lazy" decoding="async"><figcaption>Mio 5</figcaption></figure>
+                <figure class="pola"><span class="tape" aria-hidden="true"></span><img src="https://wsrv.nl/?url=https://files.catbox.moe/fnql1z.jpeg&w=344&h=300&fit=cover&we&output=webp&q=75" alt="Foto admin Mio 1" width="344" height="300" loading="lazy" decoding="async"><figcaption>Mio 1</figcaption></figure>
+                <figure class="pola"><span class="tape" aria-hidden="true"></span><img src="https://wsrv.nl/?url=https://files.catbox.moe/i0o2ws.jpeg&w=344&h=300&fit=cover&we&output=webp&q=75" alt="Foto admin Mio 2" width="344" height="300" loading="lazy" decoding="async"><figcaption>Mio 2</figcaption></figure>
+                <figure class="pola"><span class="tape" aria-hidden="true"></span><img src="https://wsrv.nl/?url=https://files.catbox.moe/p5e341.jpeg&w=344&h=300&fit=cover&we&output=webp&q=75" alt="Foto admin Mio 3" width="344" height="300" loading="lazy" decoding="async"><figcaption>Mio 3</figcaption></figure>
+                <figure class="pola"><span class="tape" aria-hidden="true"></span><img src="https://wsrv.nl/?url=https://files.catbox.moe/ivli2m.jpeg&w=344&h=300&fit=cover&we&output=webp&q=75" alt="Foto admin Mio 4" width="344" height="300" loading="lazy" decoding="async"><figcaption>Mio 4</figcaption></figure>
+                <figure class="pola"><span class="tape" aria-hidden="true"></span><img src="https://wsrv.nl/?url=https://files.catbox.moe/cff3i3.jpeg&w=344&h=300&fit=cover&we&output=webp&q=75" alt="Foto admin Mio 5" width="344" height="300" loading="lazy" decoding="async"><figcaption>Mio 5</figcaption></figure>
             </div>
         </div>
     </section>
@@ -760,64 +780,64 @@
             <!-- 01 -->
             <article class="prod reveal">
                 <span class="prod-num" aria-hidden="true">01</span>
-                <div class="prod-frame"><img src="https://files.catbox.moe/nb8v1s.jpg" alt="Logo mio downloader" width="148" height="148" loading="lazy" decoding="async"></div>
+                <div class="prod-frame"><img src="https://wsrv.nl/?url=https://files.catbox.moe/nb8v1s.jpg&w=148&h=148&fit=cover&we&output=webp&q=80" alt="Logo mio downloader" width="148" height="148" loading="lazy" decoding="async"></div>
                 <span class="cat">bot</span>
                 <h3>mio downloader</h3>
                 <p>Kirim link TikTok, bot balikin videonya tanpa watermark. Simpel, nggak pakai ribet, semuanya langsung di chat Telegram.</p>
                 <div class="prod-btns">
-                    <a href="https://t.me/tiktiok_downloader_mio_bot" target="_blank" class="btn btn-solid" onclick="showToast('Membuka bot...')">
-                        <i class="fab fa-telegram-plane" aria-hidden="true"></i> link bot
+                    <a href="https://t.me/tiktiok_downloader_mio_bot" target="_blank" rel="noopener" class="btn btn-solid" onclick="showToast('Membuka bot...')">
+                        <svg class="ic" aria-hidden="true"><use href="#i-telegram"></use></svg> link bot
                     </a>
-                    <button class="btn btn-line" onclick="openModal('https://files.catbox.moe/q5zzn9.jpeg','bukti mio downloader')">
-                        <i class="fas fa-image" aria-hidden="true"></i> screenshot
+                    <button class="btn btn-line" onclick="openModal('https://wsrv.nl/?url=https://files.catbox.moe/q5zzn9.jpeg&w=828&output=webp&q=80','bukti mio downloader')">
+                        <svg class="ic" aria-hidden="true"><use href="#i-image"></use></svg> screenshot
                     </button>
                 </div>
             </article>
             <!-- 02 -->
             <article class="prod reveal">
                 <span class="prod-num" aria-hidden="true">02</span>
-                <div class="prod-frame"><img src="https://files.catbox.moe/i1znth.jpeg" alt="Logo mio media" width="148" height="148" loading="lazy" decoding="async"></div>
+                <div class="prod-frame"><img src="https://wsrv.nl/?url=https://files.catbox.moe/i1znth.jpeg&w=148&h=148&fit=cover&we&output=webp&q=80" alt="Logo mio media" width="148" height="148" loading="lazy" decoding="async"></div>
                 <span class="cat">website</span>
                 <h3>mio media</h3>
                 <p>Tempat ngumpul buat yang suka anime &amp; cosplay. Share momen, cari teman satu hobi, suasananya santai aja.</p>
                 <div class="prod-btns">
-                    <a href="https://anime-x-cosplay-lovers.miokuu.web.id/" target="_blank" class="btn btn-solid" onclick="showToast('Membuka website...')">
-                        <i class="fas fa-external-link-alt" aria-hidden="true"></i> website
+                    <a href="https://anime-x-cosplay-lovers.miokuu.web.id/" target="_blank" rel="noopener" class="btn btn-solid" onclick="showToast('Membuka website...')">
+                        <svg class="ic" aria-hidden="true"><use href="#i-external"></use></svg> website
                     </a>
-                    <button class="btn btn-line" onclick="openModal('https://files.catbox.moe/f3jw9c.jpeg','bukti mio media')">
-                        <i class="fas fa-image" aria-hidden="true"></i> screenshot
+                    <button class="btn btn-line" onclick="openModal('https://wsrv.nl/?url=https://files.catbox.moe/f3jw9c.jpeg&w=828&output=webp&q=80','bukti mio media')">
+                        <svg class="ic" aria-hidden="true"><use href="#i-image"></use></svg> screenshot
                     </button>
                 </div>
             </article>
             <!-- 03 -->
             <article class="prod reveal">
                 <span class="prod-num" aria-hidden="true">03</span>
-                <div class="prod-frame"><img src="https://alightmtion.com/wp-content/uploads/2025/08/cropped-logo.webp" alt="Logo am premium gratis" width="148" height="148" loading="lazy" decoding="async"></div>
+                <div class="prod-frame"><img src="https://wsrv.nl/?url=https://alightmtion.com/wp-content/uploads/2025/08/cropped-logo.webp&w=148&h=148&fit=cover&we&output=webp&q=80" alt="Logo am premium gratis" width="148" height="148" loading="lazy" decoding="async"></div>
                 <span class="cat">tools</span>
                 <h3>am premium gratis</h3>
                 <p>Tool editing premium yang bisa dipakai gratis. Buat kamu yang suka bikin konten tapi nggak mau keluar duit banyak.</p>
                 <div class="prod-btns">
-                    <a href="https://diyymotion.vercel.app" target="_blank" class="btn btn-solid" onclick="showToast('Membuka website...')">
-                        <i class="fas fa-external-link-alt" aria-hidden="true"></i> website
+                    <a href="https://diyymotion.vercel.app" target="_blank" rel="noopener" class="btn btn-solid" onclick="showToast('Membuka website...')">
+                        <svg class="ic" aria-hidden="true"><use href="#i-external"></use></svg> website
                     </a>
-                    <button class="btn btn-line" onclick="openModal('https://files.catbox.moe/emxe4j.jpg','bukti am premium')">
-                        <i class="fas fa-image" aria-hidden="true"></i> screenshot
+                    <button class="btn btn-line" onclick="openModal('https://wsrv.nl/?url=https://files.catbox.moe/emxe4j.jpg&w=828&output=webp&q=80','bukti am premium')">
+                        <svg class="ic" aria-hidden="true"><use href="#i-image"></use></svg> screenshot
                     </button>
                 </div>
             </article>
             <!-- 04 -->
             <article class="prod reveal">
                 <span class="prod-num" aria-hidden="true">04</span>
-                <div class="prod-frame"><img src="https://files.catbox.moe/alahc5.jpeg" alt="Logo mio store" width="148" height="148" loading="lazy" decoding="async"></div>
+                <div class="prod-frame"><img src="https://wsrv.nl/?url=https://files.catbox.moe/alahc5.jpeg&w=148&h=148&fit=cover&we&output=webp&q=80" alt="Logo mio store" width="148" height="148" loading="lazy" decoding="async"></div>
                 <span class="cat">bot</span>
                 <h3>mio store</h3>
                 <p>Toko resmi produk mio dev. Chat bot, pilih produk, order — semua otomatis, nggak perlu nunggu admin online.</p>
                 <div class="prod-btns">
-                    <a href="https://t.me/mio_toko_online_bot" target="_blank" class="btn btn-solid" onclick="showToast('Membuka bot...')">
-                        <i class="fab fa-telegram-plane" aria-hidden="true"></i> buka bot
+                    <a href="https://t.me/mio_toko_online_bot" target="_blank" rel="noopener" class="btn btn-solid" onclick="showToast('Membuka bot...')">
+                        <svg class="ic" aria-hidden="true"><use href="#i-telegram"></use></svg> buka bot
                     </a>
-                    <button class="btn btn-line" onclick="openModal('https://files.catbox.moe/2yxrbx.jpeg','mio store bot')">
-                        <i class="fas fa-image" aria-hidden="true"></i> lihat
+                    <button class="btn btn-line" onclick="openModal('https://wsrv.nl/?url=https://files.catbox.moe/2yxrbx.jpeg&w=828&output=webp&q=80','mio store bot')">
+                        <svg class="ic" aria-hidden="true"><use href="#i-image"></use></svg> lihat
                     </button>
                 </div>
             </article>
@@ -825,16 +845,16 @@
             <article class="prod reveal">
                 <span class="sticker" aria-hidden="true">murah ✓</span>
                 <span class="prod-num" aria-hidden="true">05</span>
-                <div class="prod-frame"><img src="https://files.catbox.moe/1wjocc.jpeg" alt="Logo mio cpanel" width="148" height="148" loading="lazy" decoding="async"></div>
+                <div class="prod-frame"><img src="https://wsrv.nl/?url=https://files.catbox.moe/1wjocc.jpeg&w=148&h=148&fit=cover&we&output=webp&q=80" alt="Logo mio cpanel" width="148" height="148" loading="lazy" decoding="async"></div>
                 <span class="cat">panel</span>
                 <h3>mio cpanel</h3>
                 <p>Panel Pterodactyl murah dengan server stabil. Cocok buat hosting bot &amp; project kamu. Habis masa aktif? Bisa diperpanjang kapan aja.</p>
                 <div class="prod-btns">
-                    <a href="https://t.me/mio_cpanel_bot" target="_blank" class="btn btn-solid" onclick="showToast('Membuka bot...')">
-                        <i class="fab fa-telegram-plane" aria-hidden="true"></i> order bot
+                    <a href="https://t.me/mio_cpanel_bot" target="_blank" rel="noopener" class="btn btn-solid" onclick="showToast('Membuka bot...')">
+                        <svg class="ic" aria-hidden="true"><use href="#i-telegram"></use></svg> order bot
                     </a>
-                    <button class="btn btn-line" onclick="openModal('https://files.catbox.moe/439gpy.jpeg','panel pterodactyl')">
-                        <i class="fas fa-image" aria-hidden="true"></i> lihat
+                    <button class="btn btn-line" onclick="openModal('https://wsrv.nl/?url=https://files.catbox.moe/439gpy.jpeg&w=828&output=webp&q=80','panel pterodactyl')">
+                        <svg class="ic" aria-hidden="true"><use href="#i-image"></use></svg> lihat
                     </button>
                 </div>
             </article>
@@ -862,13 +882,12 @@
         </div>
         <div class="dev">
             <div class="dev-video-bg">
-                <!-- PERF: video lazy load — baru di-download saat kelihatan -->
                 <video muted loop playsinline preload="none" data-src="https://files.catbox.moe/3a4zwd.mp4" aria-hidden="true"></video>
             </div>
             <div class="dev-video-overlay" aria-hidden="true"></div>
             <div class="dev-content">
                 <div class="dev-avatar">
-                    <img src="https://files.catbox.moe/alahc5.jpeg" alt="Foto profil mio dev" width="176" height="176" loading="lazy" decoding="async">
+                    <img src="https://wsrv.nl/?url=https://files.catbox.moe/alahc5.jpeg&w=176&h=176&fit=cover&we&output=webp&q=80" alt="Foto profil mio dev" width="176" height="176" loading="lazy" decoding="async">
                     <span class="online-dot" aria-hidden="true"></span>
                 </div>
                 <div class="dev-name">mio dev</div>
@@ -889,21 +908,20 @@
                     </div>
                 </div>
                 <div class="dev-socials">
-                    <a href="https://whatsapp.com/channel/0029VbCrjmG6LwHkDpCbEi0z" target="_blank" class="dev-social-btn" title="WhatsApp" aria-label="WhatsApp mio dev">
-                        <i class="fab fa-whatsapp" aria-hidden="true"></i>
+                    <a href="https://whatsapp.com/channel/0029VbCrjmG6LwHkDpCbEi0z" target="_blank" rel="noopener" class="dev-social-btn" title="WhatsApp" aria-label="WhatsApp mio dev">
+                        <svg class="ic" aria-hidden="true"><use href="#i-whatsapp"></use></svg>
                     </a>
-                    <a href="https://vt.tiktok.com/ZSVm2YLPm/" target="_blank" class="dev-social-btn" title="TikTok" aria-label="TikTok mio dev">
-                        <i class="fab fa-tiktok" aria-hidden="true"></i>
+                    <a href="https://vt.tiktok.com/ZSVm2YLPm/" target="_blank" rel="noopener" class="dev-social-btn" title="TikTok" aria-label="TikTok mio dev">
+                        <svg class="ic" aria-hidden="true"><use href="#i-tiktok"></use></svg>
                     </a>
-                    <a href="https://chat.whatsapp.com/DHHAvScSJ0WEQIAPrH3XlF" target="_blank" class="dev-social-btn" title="Group" aria-label="Group WhatsApp mio dev">
-                        <i class="fas fa-users" aria-hidden="true"></i>
+                    <a href="https://chat.whatsapp.com/DHHAvScSJ0WEQIAPrH3XlF" target="_blank" rel="noopener" class="dev-social-btn" title="Group" aria-label="Group WhatsApp mio dev">
+                        <svg class="ic" aria-hidden="true"><use href="#i-users"></use></svg>
                     </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- FOOTER -->
     <footer>
         <span class="foot-hand">dibikin pelan-pelan, bukan template ✌️</span>
         <p class="foot-sub">© 2025 mio dev — toko kecil, semangat besar</p>
@@ -914,26 +932,26 @@
     <!-- INFO MODAL -->
     <div class="overlay" id="infoModal" role="dialog" aria-modal="true" aria-label="Informasi Mio Official">
         <span class="close-x" onclick="closeInfoModal()" onkeydown="keyOpen(event, closeInfoModal)"
-              role="button" tabindex="0" aria-label="Tutup"><i class="fas fa-xmark" aria-hidden="true"></i></span>
+              role="button" tabindex="0" aria-label="Tutup"><svg class="ic" aria-hidden="true"><use href="#i-x"></use></svg></span>
         <div class="sheet">
             <span class="sheet-hello">pesan singkat dari admin 💌</span>
             <h3>Informasi Mio Official</h3>
             <div class="notice">Makasih udah mampir, semoga ketemu yang cocok!</div>
             <div class="links">
                 <div class="link-row">
-                    <i class="fab fa-whatsapp wa" aria-hidden="true"></i>
-                    <a href="https://whatsapp.com/channel/0029VbCrjmG6LwHkDpCbEi0z" target="_blank">Saluran WhatsApp Mio Official ID</a>
-                    <i class="fas fa-arrow-right arr" aria-hidden="true"></i>
+                    <svg class="ic wa" aria-hidden="true"><use href="#i-whatsapp"></use></svg>
+                    <a href="https://whatsapp.com/channel/0029VbCrjmG6LwHkDpCbEi0z" target="_blank" rel="noopener">Saluran WhatsApp Mio Official ID</a>
+                    <svg class="ic arr" aria-hidden="true"><use href="#i-arrow"></use></svg>
                 </div>
                 <div class="link-row">
-                    <i class="fab fa-tiktok tt" aria-hidden="true"></i>
-                    <a href="https://vt.tiktok.com/ZSVm2YLPm/" target="_blank">TikTok: @mioDev</a>
-                    <i class="fas fa-arrow-right arr" aria-hidden="true"></i>
+                    <svg class="ic" aria-hidden="true" style="color:var(--ink)"><use href="#i-tiktok"></use></svg>
+                    <a href="https://vt.tiktok.com/ZSVm2YLPm/" target="_blank" rel="noopener">TikTok: @mioDev</a>
+                    <svg class="ic arr" aria-hidden="true"><use href="#i-arrow"></use></svg>
                 </div>
                 <div class="link-row">
-                    <i class="fab fa-whatsapp wa" aria-hidden="true"></i>
-                    <a href="https://chat.whatsapp.com/DHHAvScSJ0WEQIAPrH3XlF" target="_blank">Group Mio dev</a>
-                    <i class="fas fa-arrow-right arr" aria-hidden="true"></i>
+                    <svg class="ic wa" aria-hidden="true"><use href="#i-whatsapp"></use></svg>
+                    <a href="https://chat.whatsapp.com/DHHAvScSJ0WEQIAPrH3XlF" target="_blank" rel="noopener">Group Mio dev</a>
+                    <svg class="ic arr" aria-hidden="true"><use href="#i-arrow"></use></svg>
                 </div>
             </div>
         </div>
@@ -942,67 +960,63 @@
     <!-- IMAGE MODAL -->
     <div class="overlay" id="imgModal" role="dialog" aria-modal="true" aria-label="Screenshot produk">
         <span class="close-x" onclick="closeModal()" onkeydown="keyOpen(event, closeModal)"
-              role="button" tabindex="0" aria-label="Tutup"><i class="fas fa-xmark" aria-hidden="true"></i></span>
+              role="button" tabindex="0" aria-label="Tutup"><svg class="ic" aria-hidden="true"><use href="#i-x"></use></svg></span>
         <div class="photo">
             <img src="" alt="Screenshot produk" id="modalImage" decoding="async">
             <div class="cap" id="modalCap">screenshot</div>
         </div>
     </div>
 
-    <!-- NAV BAWAH -->
     <nav class="bottom-nav" aria-label="Navigasi halaman">
         <div class="nav-tab active" data-target="top" onclick="goTo('top')">
-            <i class="fas fa-house" aria-hidden="true"></i>
+            <svg class="ic" aria-hidden="true"><use href="#i-home"></use></svg>
             <span>Home</span>
         </div>
         <div class="nav-tab" data-target="produk" onclick="goTo('produk')">
-            <i class="fas fa-box-open" aria-hidden="true"></i>
+            <svg class="ic" aria-hidden="true"><use href="#i-box"></use></svg>
             <span>Produk</span>
         </div>
         <div class="nav-tab" data-target="dev" onclick="goTo('dev')">
-            <i class="fas fa-code" aria-hidden="true"></i>
+            <svg class="ic" aria-hidden="true"><use href="#i-code"></use></svg>
             <span>Dev</span>
         </div>
     </nav>
 
     <div class="toast" id="toast" role="status" aria-live="polite">
-        <i class="fas fa-check-circle" style="color:#7eb89a;font-size:13px" aria-hidden="true"></i>
+        <svg class="ic" aria-hidden="true"><use href="#i-check"></use></svg>
         <span id="toastMsg">ok</span>
     </div>
 
     <script>
-        // ===== A11Y: aktivasi keyboard (Enter/Space) untuk elemen non-button =====
         function keyOpen(e, fn) {
             if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fn(); }
         }
-
-        // ===== A11Y: Escape menutup modal =====
         document.addEventListener('keydown', e => {
             if (e.key === 'Escape') { closeModal(); closeInfoModal(); }
         });
 
         // ===== MUSIC =====
         const audio = document.getElementById('bgMusic');
-        const playIcon = document.getElementById('playIcon');
+        const playUse = document.getElementById('playUse');
         const playBtn = document.getElementById('playBtn');
         const playerBox = document.getElementById('playerBox');
         let isPlaying = false;
         function toggleMusic() {
             if (isPlaying) {
                 audio.pause();
-                playIcon.className = 'fas fa-play';
+                playUse.setAttribute('href', '#i-play');
                 playBtn.setAttribute('aria-label', 'Putar musik');
                 playerBox.classList.remove('playing');
             } else {
                 audio.play().catch(() => {});
-                playIcon.className = 'fas fa-pause';
+                playUse.setAttribute('href', '#i-pause');
                 playBtn.setAttribute('aria-label', 'Jeda musik');
                 playerBox.classList.add('playing');
             }
             isPlaying = !isPlaying;
         }
 
-        // ===== VIDEO DEV: lazy load — baru di-download saat kelihatan =====
+        // ===== VIDEO DEV: lazy load =====
         const devVideo = document.querySelector('.dev-video-bg video');
         const devProfile = document.querySelector('.dev');
         let videoObserved = false;
@@ -1020,19 +1034,14 @@
                         devVideo.play().catch(() => {});
                         videoObserved = true;
                     }
-                } else {
-                    devVideo.pause();
-                    videoObserved = false;
-                }
+                } else { devVideo.pause(); videoObserved = false; }
             });
         }, { threshold: 0.2 });
         vidObserver.observe(devProfile);
 
         // ===== REVEAL SAAT SCROLL =====
         const revObs = new IntersectionObserver((entries) => {
-            entries.forEach(e => {
-                if (e.isIntersecting) { e.target.classList.add('in'); revObs.unobserve(e.target); }
-            });
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); revObs.unobserve(e.target); } });
         }, { threshold: 0.12 });
         document.querySelectorAll('.reveal').forEach(el => revObs.observe(el));
 
@@ -1054,22 +1063,37 @@
         function closeModal() { imgModal.classList.remove('show'); }
         imgModal.addEventListener('click', e => { if (e.target === imgModal) closeModal(); });
 
-        // ===== CAROUSEL AUTO-SCROLL =====
+        // ===== CAROUSEL: auto-scroll, berhenti saat off-screen =====
         const container = document.getElementById('carouselContainer');
         const track = document.getElementById('carouselTrack');
-        let autoId, interacting = false, resumeTimer;
+        const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+        let autoId, interacting = false, resumeTimer, rafOn = false, carVisible = true;
         const speed = 0.55;
 
         function autoScroll() {
+            if (rafOn) return;
+            rafOn = true;
+            tick();
+        }
+        function tick() {
+            if (!carVisible || interacting || reducedMotion) { rafOn = false; return; }
             container.scrollLeft += speed;
             if (container.scrollLeft >= track.scrollWidth / 2) container.scrollLeft -= track.scrollWidth / 2;
-            if (!interacting) autoId = requestAnimationFrame(autoScroll);
+            autoId = requestAnimationFrame(tick);
         }
-        function stopScroll() { cancelAnimationFrame(autoId); }
+        function stopScroll() { cancelAnimationFrame(autoId); rafOn = false; }
         function resumeLater(ms) {
             clearTimeout(resumeTimer);
             resumeTimer = setTimeout(() => { interacting = false; autoScroll(); }, ms);
         }
+
+        const carObs = new IntersectionObserver((entries) => {
+            entries.forEach(en => {
+                carVisible = en.isIntersecting;
+                if (carVisible) autoScroll(); else stopScroll();
+            });
+        });
+        carObs.observe(container);
 
         container.addEventListener('mouseenter', () => { stopScroll(); interacting = true; });
         container.addEventListener('mouseleave', () => resumeLater(1500));
@@ -1098,8 +1122,6 @@
             const el = document.getElementById(id);
             if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
-
-        // scroll-spy
         const tabs = document.querySelectorAll('.nav-tab');
         function spy() {
             const y = window.scrollY + 220;
@@ -1120,7 +1142,6 @@
             setTimeout(() => t.classList.remove('show'), 2500);
         }
 
-        // ===== TANGGAL OTOMATIS =====
         document.getElementById('updateDate').textContent =
             new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
     </script>
