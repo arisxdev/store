@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Mio Store</title>
-    <!-- PATCH A: favicon inline — 0 request eksternal -->
+    <!-- Favicon inline — 0 request eksternal -->
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🌸%3C/text%3E%3C/svg%3E">
     <meta name="description" content="Download aplikasi Mio Official ID dan berbagai aplikasi premium lainnya. Update terbaru dan fitur terbaik tersedia di Mio Store.">
     <meta name="theme-color" content="#faf7f2">
@@ -17,12 +17,11 @@
     <meta property="twitter:description" content="Download aplikasi Mio Official ID dan berbagai aplikasi premium lainnya.">
     <meta property="twitter:image" content="https://files.catbox.moe/alahc5.jpeg">
 
-    <!-- PATCH B: preconnect (Google Fonts & cdnjs SUDAH DIHAPUS) -->
+    <!-- PATCH 2: preconnect catbox DIHAPUS (audio/video sudah deferred) -->
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     <link rel="preconnect" href="https://wsrv.nl">
-    <link rel="preconnect" href="https://files.catbox.moe">
 
-    <!-- PATCH B: font self-host dari jsdelivr — preload paralel sejak detik 0 -->
+    <!-- Font self-host dari jsdelivr — preload paralel sejak detik 0 -->
     <link rel="preload" as="font" type="font/woff2" crossorigin href="https://cdn.jsdelivr.net/fontsource/fonts/plus-jakarta-sans@latest/latin-400-normal.woff2">
     <link rel="preload" as="font" type="font/woff2" crossorigin href="https://cdn.jsdelivr.net/fontsource/fonts/plus-jakarta-sans@latest/latin-700-normal.woff2">
     <link rel="preload" as="font" type="font/woff2" crossorigin href="https://cdn.jsdelivr.net/fontsource/fonts/plus-jakarta-sans@latest/latin-800-normal.woff2">
@@ -48,7 +47,7 @@
     </script>
 
     <style>
-        /* PATCH B: @font-face self-host */
+        /* @font-face self-host */
         @font-face{font-family:'Plus Jakarta Sans';font-style:normal;font-weight:400;font-display:swap;src:url(https://cdn.jsdelivr.net/fontsource/fonts/plus-jakarta-sans@latest/latin-400-normal.woff2) format('woff2')}
         @font-face{font-family:'Plus Jakarta Sans';font-style:normal;font-weight:700;font-display:swap;src:url(https://cdn.jsdelivr.net/fontsource/fonts/plus-jakarta-sans@latest/latin-700-normal.woff2) format('woff2')}
         @font-face{font-family:'Plus Jakarta Sans';font-style:normal;font-weight:800;font-display:swap;src:url(https://cdn.jsdelivr.net/fontsource/fonts/plus-jakarta-sans@latest/latin-800-normal.woff2) format('woff2')}
@@ -432,7 +431,6 @@
         .btn-line:hover { border-style: solid; border-color: var(--ink); color: var(--ink); }
 
         /* ===== DEV PROFILE ===== */
-        /* PATCH C: skip render selama belum kelihatan */
         .dev {
             content-visibility: auto;
             contain-intrinsic-size: auto 560px;
@@ -660,7 +658,7 @@
 </head>
 <body>
 
-    <!-- ===== SPRITE IKON SVG (pengganti Font Awesome — 0 request) ===== -->
+    <!-- ===== SPRITE IKON SVG (0 request) ===== -->
     <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
         <symbol id="i-bell" viewBox="0 0 24 24"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/></symbol>
         <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></symbol>
@@ -752,8 +750,9 @@
         </div>
         <div class="polacar" id="carouselContainer">
             <div class="polacar-track" id="carouselTrack">
-                <figure class="pola"><span class="tape" aria-hidden="true"></span><img src="https://wsrv.nl/?url=https://files.catbox.moe/fnql1z.jpeg&w=344&h=300&fit=cover&we&output=webp&q=75" alt="Foto admin Mio 1" width="344" height="300" loading="eager" fetchpriority="high" decoding="async"><figcaption>Mio 1</figcaption></figure>
-                <figure class="pola"><span class="tape" aria-hidden="true"></span><img src="https://wsrv.nl/?url=https://files.catbox.moe/i0o2ws.jpeg&w=344&h=300&fit=cover&we&output=webp&q=75" alt="Foto admin Mio 2" width="344" height="300" loading="eager" decoding="async"><figcaption>Mio 2</figcaption></figure>
+                <!-- PATCH 1: semua polaroid lazy (LCP = teks hero, bukan gambar) -->
+                <figure class="pola"><span class="tape" aria-hidden="true"></span><img src="https://wsrv.nl/?url=https://files.catbox.moe/fnql1z.jpeg&w=344&h=300&fit=cover&we&output=webp&q=75" alt="Foto admin Mio 1" width="344" height="300" loading="lazy" decoding="async"><figcaption>Mio 1</figcaption></figure>
+                <figure class="pola"><span class="tape" aria-hidden="true"></span><img src="https://wsrv.nl/?url=https://files.catbox.moe/i0o2ws.jpeg&w=344&h=300&fit=cover&we&output=webp&q=75" alt="Foto admin Mio 2" width="344" height="300" loading="lazy" decoding="async"><figcaption>Mio 2</figcaption></figure>
                 <figure class="pola"><span class="tape" aria-hidden="true"></span><img src="https://wsrv.nl/?url=https://files.catbox.moe/p5e341.jpeg&w=344&h=300&fit=cover&we&output=webp&q=75" alt="Foto admin Mio 3" width="344" height="300" loading="lazy" decoding="async"><figcaption>Mio 3</figcaption></figure>
                 <figure class="pola"><span class="tape" aria-hidden="true"></span><img src="https://wsrv.nl/?url=https://files.catbox.moe/ivli2m.jpeg&w=344&h=300&fit=cover&we&output=webp&q=75" alt="Foto admin Mio 4" width="344" height="300" loading="lazy" decoding="async"><figcaption>Mio 4</figcaption></figure>
                 <figure class="pola"><span class="tape" aria-hidden="true"></span><img src="https://wsrv.nl/?url=https://files.catbox.moe/cff3i3.jpeg&w=344&h=300&fit=cover&we&output=webp&q=75" alt="Foto admin Mio 5" width="344" height="300" loading="lazy" decoding="async"><figcaption>Mio 5</figcaption></figure>
