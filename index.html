@@ -6,6 +6,7 @@
     <title>Mio Store</title>
     <link rel="icon" type="image/x-icon" href="https://files.catbox.moe/alahc5.jpeg">
     <meta name="description" content="Download aplikasi Mio Official ID dan berbagai aplikasi premium lainnya. Update terbaru dan fitur terbaik tersedia di Mio Store.">
+    <meta name="theme-color" content="#faf7f2">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Mio Store - Official App Store">
     <meta property="og:description" content="Download aplikasi Mio Official ID dan berbagai aplikasi premium lainnya.">
@@ -14,20 +15,52 @@
     <meta property="twitter:title" content="Mio Store - Official App Store">
     <meta property="twitter:description" content="Download aplikasi Mio Official ID dan berbagai aplikasi premium lainnya.">
     <meta property="twitter:image" content="https://files.catbox.moe/alahc5.jpeg">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- ===== PERF: preconnect ===== -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://files.catbox.moe" crossorigin>
+
+    <!-- ===== PERF: CSS font jadi non-render-blocking ===== -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Caveat:wght@600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Caveat:wght@600;700&display=swap" rel="stylesheet"></noscript>
+
+    <!-- ===== A11Y/AGENTIC: structured data ===== -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "OnlineStore",
+      "name": "Mio Store",
+      "url": "https://storee.miokuu.web.id/",
+      "description": "Toko bot Telegram, panel Pterodactyl murah, dan tools bikinan mio dev.",
+      "image": "https://files.catbox.moe/alahc5.jpeg",
+      "founder": { "@type": "Person", "name": "mio dev", "alternateName": "@ArisDEv" },
+      "makesOffer": [
+        { "@type": "Offer", "itemOffered": { "@type": "SoftwareApplication", "name": "mio downloader", "applicationCategory": "Bot Telegram" }, "url": "https://t.me/tiktiok_downloader_mio_bot" },
+        { "@type": "Offer", "itemOffered": { "@type": "WebSite", "name": "mio media" }, "url": "https://anime-x-cosplay-lovers.miokuu.web.id/" },
+        { "@type": "Offer", "itemOffered": { "@type": "SoftwareApplication", "name": "am premium gratis" }, "url": "https://diyymotion.vercel.app" },
+        { "@type": "Offer", "itemOffered": { "@type": "SoftwareApplication", "name": "mio store bot", "applicationCategory": "Bot Telegram" }, "url": "https://t.me/mio_toko_online_bot" },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "mio cpanel", "description": "Panel Pterodactyl murah, bisa diperpanjang" }, "url": "https://t.me/mio_cpanel_bot" }
+      ]
+    }
+    </script>
+
     <style>
         :root {
             --paper: #faf7f2;
             --card: #ffffff;
             --ink: #27221d;
-            --muted: #7d7569;
-            --faint: #b3aaa0;
+            --muted: #6b6358;          /* A11Y: dipertegas, lolos kontras 4.5:1 */
+            --faint: #6e675c;          /* A11Y: dipertegas */
             --line: rgba(39,34,29,.09);
-            --accent: #e07856;
-            --accent-deep: #c85f3f;
+            --accent: #e07856;         /* dekoratif: garis, shadow, gradasi */
+            --accent-strong: #b04e2e;  /* A11Y: tombol & teks oranye, lolos kontras */
             --accent-soft: rgba(224,120,86,.1);
-            --green: #3f8f6c;
+            --green: #3f8f6c;          /* dekoratif */
+            --green-text: #2e7355;     /* A11Y: teks hijau, lolos kontras */
             --green-soft: rgba(63,143,108,.12);
             --yellow: #f6c453;
             --r: 18px;
@@ -43,6 +76,9 @@
             padding-bottom: 100px;
             overflow-x: hidden;
         }
+
+        /* A11Y: fokus keyboard terlihat */
+        :focus-visible { outline: 2.5px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
 
         /* grain halus — kesan kertas */
         body::before {
@@ -113,7 +149,7 @@
             display: inline-block;
             font-family: 'Caveat', cursive;
             font-size: 23px;
-            color: var(--accent-deep);
+            color: var(--accent-strong);
             transform: rotate(-2deg);
         }
         .hero-title {
@@ -122,7 +158,6 @@
             line-height: 1.22;
             margin: 8px 0 12px;
         }
-        /* efek stabilo */
         .hero-title em {
             font-style: normal;
             background: linear-gradient(transparent 62%, rgba(246,196,83,.55) 62%);
@@ -135,7 +170,7 @@
         .status {
             display: inline-flex; align-items: center; gap: 8px;
             font-size: 12px; font-weight: 700;
-            color: var(--green);
+            color: var(--green-text);
             background: var(--green-soft);
             border: 1px solid rgba(63,143,108,.25);
             padding: 8px 14px; border-radius: 999px;
@@ -203,7 +238,7 @@
             width: 46px; height: 46px; border-radius: 50%;
             background: linear-gradient(135deg, var(--accent), #e89a7c);
             display: grid; place-items: center;
-            font-size: 17px; color: #fff; flex-shrink: 0;
+            font-size: 17px; flex-shrink: 0;
             box-shadow: 0 4px 12px rgba(224,120,86,.35);
         }
         .player.playing .player-art { animation: bump 1.2s ease-in-out infinite; }
@@ -214,9 +249,7 @@
             font-size: 13px; font-weight: 800;
             white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
         }
-        .player-meta .sub {
-            font-size: 11px; color: var(--muted); margin-top: 2px;
-        }
+        .player-meta .sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
 
         .eq { display: flex; gap: 3px; align-items: flex-end; height: 20px; }
         .eq span {
@@ -319,10 +352,6 @@
             box-shadow: 0 18px 36px rgba(39,34,29,.13);
             border-color: rgba(39,34,29,.16);
         }
-        .prod:nth-child(2) { transition-delay: .05s; }
-        .prod:nth-child(3) { transition-delay: .1s; }
-        .prod:nth-child(4) { transition-delay: .15s; }
-        .prod:nth-child(5) { transition-delay: .2s; }
 
         .prod-num {
             position: absolute; top: 6px; right: 14px;
@@ -340,6 +369,7 @@
             transition: transform .25s ease;
             margin-bottom: 13px;
             position: relative; z-index: 1;
+            background: var(--paper);
         }
         .prod:hover .prod-frame { transform: rotate(0); }
         .prod-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
@@ -359,7 +389,7 @@
             display: inline-block;
             font-size: 10.5px; font-weight: 800;
             text-transform: uppercase; letter-spacing: 1px;
-            color: var(--accent-deep);
+            color: var(--accent-strong);
             background: var(--accent-soft);
             padding: 4px 11px; border-radius: 999px;
             margin-bottom: 9px;
@@ -386,10 +416,10 @@
             transition: .18s ease; text-decoration: none;
         }
         .btn-solid {
-            background: var(--accent); color: #fff;
+            background: var(--accent-strong); color: #fff;
             box-shadow: 0 4px 12px rgba(224,120,86,.35);
         }
-        .btn-solid:hover { background: var(--accent-deep); transform: translateY(-1px); }
+        .btn-solid:hover { background: #963f24; transform: translateY(-1px); }
         .btn-solid:active { transform: scale(.97); }
         .btn-line {
             background: transparent; color: var(--muted);
@@ -405,7 +435,7 @@
             border: 1px solid var(--line);
             box-shadow: 0 8px 30px rgba(39,34,29,.1);
         }
-        .dev-video-bg { position: absolute; inset: 0; z-index: 0; }
+        .dev-video-bg { position: absolute; inset: 0; z-index: 0; background: var(--paper); }
         .dev-video-bg video { width: 100%; height: 100%; object-fit: cover; display: block; }
         .dev-video-overlay {
             position: absolute; inset: 0; z-index: 1;
@@ -439,7 +469,7 @@
             border-radius: 50%;
         }
         .dev-name { font-size: 19px; font-weight: 800; letter-spacing: -.3px; }
-        .dev-handle { font-family: 'Caveat', cursive; font-size: 18px; color: var(--accent-deep); margin: 3px 0 9px; }
+        .dev-handle { font-family: 'Caveat', cursive; font-size: 18px; color: var(--accent-strong); margin: 3px 0 9px; }
         .dev-bio {
             font-size: 12.5px; color: var(--muted);
             line-height: 1.65; max-width: 300px;
@@ -522,7 +552,7 @@
         }
         .sheet-hello {
             font-family: 'Caveat', cursive;
-            font-size: 21px; color: var(--accent-deep);
+            font-size: 21px; color: var(--accent-strong);
             display: block; text-align: center;
         }
         .sheet h3 {
@@ -532,7 +562,7 @@
         .notice {
             background: var(--accent-soft);
             border: 1px dashed rgba(224,120,86,.45);
-            color: var(--accent-deep);
+            color: var(--accent-strong);
             padding: 11px 14px; border-radius: 12px;
             text-align: center; font-size: 12.5px; font-weight: 700;
             margin-bottom: 14px;
@@ -548,7 +578,7 @@
         }
         .link-row:hover { border-color: var(--ink); transform: translateX(4px); }
         .link-row > i { font-size: 16px; width: 20px; text-align: center; flex-shrink: 0; }
-        .link-row .wa { color: var(--green); }
+        .link-row .wa { color: var(--green-text); }
         .link-row .tt { color: var(--ink); }
         .link-row a {
             flex: 1; color: var(--ink); text-decoration: none;
@@ -576,7 +606,7 @@
             padding: 8px 0 4px; color: var(--ink);
         }
 
-        /* ===== NAV BAWAH (pill mengambang) ===== */
+        /* ===== NAV BAWAH ===== */
         .bottom-nav {
             position: fixed; bottom: 14px; left: 50%;
             transform: translateX(-50%);
@@ -621,21 +651,24 @@
 
     <header>
         <div class="logo">
-            <div class="logo-mark">🌸</div>
+            <div class="logo-mark" aria-hidden="true">🌸</div>
             <div class="logo-text">
                 <strong>Mio Store</strong>
                 <small>toko buatan sendiri</small>
             </div>
         </div>
-        <div class="bell-btn" onclick="openInfoModal()">
-            <i class="fas fa-bell"></i>
-            <span class="dot"></span>
+        <!-- A11Y: role + nama + bisa keyboard -->
+        <div class="bell-btn" onclick="openInfoModal()" onkeydown="keyOpen(event, openInfoModal)"
+             role="button" tabindex="0" aria-label="Buka informasi toko">
+            <i class="fas fa-bell" aria-hidden="true"></i>
+            <span class="dot" aria-hidden="true"></span>
         </div>
     </header>
 
+    <main>
     <!-- HERO -->
     <section class="hero">
-        <svg class="doodle" width="30" height="30" viewBox="0 0 30 30" fill="none">
+        <svg class="doodle" width="30" height="30" viewBox="0 0 30 30" fill="none" aria-hidden="true" focusable="false">
             <path d="M15 3 L18 11 L27 11 L20 17 L22 26 L15 21 L8 26 L10 17 L3 11 L12 11 Z"
                   stroke="#e07856" stroke-width="2" stroke-linejoin="round" fill="rgba(224,120,86,.12)"/>
         </svg>
@@ -646,14 +679,14 @@
             jadi kalau ada apa-apa tinggal chat yang bikin. Fast respon <i>(kecuali lagi tidur 😴)</i>.
         </p>
         <div class="hero-row">
-            <span class="status"><span class="pulse"></span> toko buka · siap order</span>
+            <span class="status"><span class="pulse" aria-hidden="true"></span> toko buka · siap order</span>
             <button class="chip" onclick="goTo('produk')">lihat produk ↓</button>
             <button class="chip chip-solid" onclick="goTo('dev')">kenalan sama dev</button>
         </div>
     </section>
 
-    <!-- TICKER -->
-    <div class="ticker">
+    <!-- TICKER (dekoratif, disembunyikan dari screen reader) -->
+    <div class="ticker" aria-hidden="true">
         <div class="ticker-track">
             <span>&nbsp;panel pterodactyl murah&nbsp;✦&nbsp;bisa diperpanjang kapan aja&nbsp;✦&nbsp;bot downloader tiktok&nbsp;✦&nbsp;am premium gratis&nbsp;✦&nbsp;order langsung via telegram&nbsp;✦&nbsp;admin fast respon&nbsp;✦&nbsp;</span>
             <span>&nbsp;panel pterodactyl murah&nbsp;✦&nbsp;bisa diperpanjang kapan aja&nbsp;✦&nbsp;bot downloader tiktok&nbsp;✦&nbsp;am premium gratis&nbsp;✦&nbsp;order langsung via telegram&nbsp;✦&nbsp;admin fast respon&nbsp;✦&nbsp;</span>
@@ -662,18 +695,19 @@
 
     <!-- MUSIC PLAYER -->
     <div class="player reveal" id="playerBox">
-        <div class="player-art">🎵</div>
+        <div class="player-art" aria-hidden="true">🎵</div>
         <div class="player-meta">
             <div class="title">lagu</div>
             <div class="sub">mio radio · diputer kalau mau</div>
         </div>
-        <div class="eq">
+        <div class="eq" aria-hidden="true">
             <span></span><span></span><span></span><span></span>
         </div>
-        <button class="play-btn" onclick="toggleMusic()">
-            <i class="fas fa-play" id="playIcon"></i>
+        <button class="play-btn" id="playBtn" onclick="toggleMusic()" aria-label="Putar musik">
+            <i class="fas fa-play" id="playIcon" aria-hidden="true"></i>
         </button>
-        <audio id="bgMusic" loop>
+        <!-- PERF: audio tidak di-download sampai diputar -->
+        <audio id="bgMusic" loop preload="none">
             <source src="https://files.catbox.moe/7k68lw.mp3" type="audio/mpeg">
         </audio>
     </div>
@@ -683,7 +717,7 @@
         <div class="sec-head">
             <div>
                 <h2>cewek admin</h2>
-                <svg class="squig" width="92" height="8" viewBox="0 0 92 8" fill="none">
+                <svg class="squig" width="92" height="8" viewBox="0 0 92 8" fill="none" aria-hidden="true" focusable="false">
                     <path d="M2 5 Q 10 1 18 5 T 34 5 T 50 5 T 66 5 T 82 5 T 90 5" stroke="#e07856" stroke-width="2.5" stroke-linecap="round"/>
                 </svg>
             </div>
@@ -691,22 +725,22 @@
         </div>
         <div class="polacar" id="carouselContainer">
             <div class="polacar-track" id="carouselTrack">
-                <figure class="pola"><span class="tape"></span><img src="https://files.catbox.moe/fnql1z.jpeg" alt=""><figcaption>Mio 1</figcaption></figure>
-                <figure class="pola"><span class="tape"></span><img src="https://files.catbox.moe/i0o2ws.jpeg" alt=""><figcaption>Mio 2</figcaption></figure>
-                <figure class="pola"><span class="tape"></span><img src="https://files.catbox.moe/p5e341.jpeg" alt=""><figcaption>Mio 3</figcaption></figure>
-                <figure class="pola"><span class="tape"></span><img src="https://files.catbox.moe/ivli2m.jpeg" alt=""><figcaption>Mio 4</figcaption></figure>
-                <figure class="pola"><span class="tape"></span><img src="https://files.catbox.moe/cff3i3.jpeg" alt=""><figcaption>Mio 5</figcaption></figure>
-                <figure class="pola"><span class="tape"></span><img src="https://files.catbox.moe/fnql1z.jpeg" alt=""><figcaption>Mio 1</figcaption></figure>
-                <figure class="pola"><span class="tape"></span><img src="https://files.catbox.moe/i0o2ws.jpeg" alt=""><figcaption>Mio 2</figcaption></figure>
-                <figure class="pola"><span class="tape"></span><img src="https://files.catbox.moe/p5e341.jpeg" alt=""><figcaption>Mio 3</figcaption></figure>
-                <figure class="pola"><span class="tape"></span><img src="https://files.catbox.moe/ivli2m.jpeg" alt=""><figcaption>Mio 4</figcaption></figure>
-                <figure class="pola"><span class="tape"></span><img src="https://files.catbox.moe/cff3i3.jpeg" alt=""><figcaption>Mio 5</figcaption></figure>
+                <figure class="pola"><span class="tape" aria-hidden="true"></span><img src="https://files.catbox.moe/fnql1z.jpeg" alt="Foto admin Mio 1" width="344" height="300" loading="eager" decoding="async"><figcaption>Mio 1</figcaption></figure>
+                <figure class="pola"><span class="tape" aria-hidden="true"></span><img src="https://files.catbox.moe/i0o2ws.jpeg" alt="Foto admin Mio 2" width="344" height="300" loading="lazy" decoding="async"><figcaption>Mio 2</figcaption></figure>
+                <figure class="pola"><span class="tape" aria-hidden="true"></span><img src="https://files.catbox.moe/p5e341.jpeg" alt="Foto admin Mio 3" width="344" height="300" loading="lazy" decoding="async"><figcaption>Mio 3</figcaption></figure>
+                <figure class="pola"><span class="tape" aria-hidden="true"></span><img src="https://files.catbox.moe/ivli2m.jpeg" alt="Foto admin Mio 4" width="344" height="300" loading="lazy" decoding="async"><figcaption>Mio 4</figcaption></figure>
+                <figure class="pola"><span class="tape" aria-hidden="true"></span><img src="https://files.catbox.moe/cff3i3.jpeg" alt="Foto admin Mio 5" width="344" height="300" loading="lazy" decoding="async"><figcaption>Mio 5</figcaption></figure>
+                <figure class="pola"><span class="tape" aria-hidden="true"></span><img src="https://files.catbox.moe/fnql1z.jpeg" alt="Foto admin Mio 1" width="344" height="300" loading="lazy" decoding="async"><figcaption>Mio 1</figcaption></figure>
+                <figure class="pola"><span class="tape" aria-hidden="true"></span><img src="https://files.catbox.moe/i0o2ws.jpeg" alt="Foto admin Mio 2" width="344" height="300" loading="lazy" decoding="async"><figcaption>Mio 2</figcaption></figure>
+                <figure class="pola"><span class="tape" aria-hidden="true"></span><img src="https://files.catbox.moe/p5e341.jpeg" alt="Foto admin Mio 3" width="344" height="300" loading="lazy" decoding="async"><figcaption>Mio 3</figcaption></figure>
+                <figure class="pola"><span class="tape" aria-hidden="true"></span><img src="https://files.catbox.moe/ivli2m.jpeg" alt="Foto admin Mio 4" width="344" height="300" loading="lazy" decoding="async"><figcaption>Mio 4</figcaption></figure>
+                <figure class="pola"><span class="tape" aria-hidden="true"></span><img src="https://files.catbox.moe/cff3i3.jpeg" alt="Foto admin Mio 5" width="344" height="300" loading="lazy" decoding="async"><figcaption>Mio 5</figcaption></figure>
             </div>
         </div>
     </section>
 
-    <div class="divider">
-        <svg width="140" height="10" viewBox="0 0 140 10" fill="none">
+    <div class="divider" aria-hidden="true">
+        <svg width="140" height="10" viewBox="0 0 140 10" fill="none" focusable="false">
             <path d="M2 6 Q 12 2 22 6 T 42 6 T 62 6 T 82 6 T 102 6 T 122 6 T 138 6" stroke="rgba(39,34,29,.3)" stroke-width="2.5" stroke-linecap="round"/>
         </svg>
     </div>
@@ -716,7 +750,7 @@
         <div class="sec-head">
             <div>
                 <h2>produk mio</h2>
-                <svg class="squig" width="92" height="8" viewBox="0 0 92 8" fill="none">
+                <svg class="squig" width="92" height="8" viewBox="0 0 92 8" fill="none" aria-hidden="true" focusable="false">
                     <path d="M2 5 Q 10 1 18 5 T 34 5 T 50 5 T 66 5 T 82 5 T 90 5" stroke="#e07856" stroke-width="2.5" stroke-linecap="round"/>
                 </svg>
             </div>
@@ -725,82 +759,82 @@
         <div class="products">
             <!-- 01 -->
             <article class="prod reveal">
-                <span class="prod-num">01</span>
-                <div class="prod-frame"><img src="https://files.catbox.moe/nb8v1s.jpg" alt=""></div>
+                <span class="prod-num" aria-hidden="true">01</span>
+                <div class="prod-frame"><img src="https://files.catbox.moe/nb8v1s.jpg" alt="Logo mio downloader" width="148" height="148" loading="lazy" decoding="async"></div>
                 <span class="cat">bot</span>
                 <h3>mio downloader</h3>
                 <p>Kirim link TikTok, bot balikin videonya tanpa watermark. Simpel, nggak pakai ribet, semuanya langsung di chat Telegram.</p>
                 <div class="prod-btns">
                     <a href="https://t.me/tiktiok_downloader_mio_bot" target="_blank" class="btn btn-solid" onclick="showToast('Membuka bot...')">
-                        <i class="fab fa-telegram-plane"></i> link bot
+                        <i class="fab fa-telegram-plane" aria-hidden="true"></i> link bot
                     </a>
                     <button class="btn btn-line" onclick="openModal('https://files.catbox.moe/q5zzn9.jpeg','bukti mio downloader')">
-                        <i class="fas fa-image"></i> screenshot
+                        <i class="fas fa-image" aria-hidden="true"></i> screenshot
                     </button>
                 </div>
             </article>
             <!-- 02 -->
             <article class="prod reveal">
-                <span class="prod-num">02</span>
-                <div class="prod-frame"><img src="https://files.catbox.moe/i1znth.jpeg" alt=""></div>
+                <span class="prod-num" aria-hidden="true">02</span>
+                <div class="prod-frame"><img src="https://files.catbox.moe/i1znth.jpeg" alt="Logo mio media" width="148" height="148" loading="lazy" decoding="async"></div>
                 <span class="cat">website</span>
                 <h3>mio media</h3>
                 <p>Tempat ngumpul buat yang suka anime &amp; cosplay. Share momen, cari teman satu hobi, suasananya santai aja.</p>
                 <div class="prod-btns">
                     <a href="https://anime-x-cosplay-lovers.miokuu.web.id/" target="_blank" class="btn btn-solid" onclick="showToast('Membuka website...')">
-                        <i class="fas fa-external-link-alt"></i> website
+                        <i class="fas fa-external-link-alt" aria-hidden="true"></i> website
                     </a>
                     <button class="btn btn-line" onclick="openModal('https://files.catbox.moe/f3jw9c.jpeg','bukti mio media')">
-                        <i class="fas fa-image"></i> screenshot
+                        <i class="fas fa-image" aria-hidden="true"></i> screenshot
                     </button>
                 </div>
             </article>
             <!-- 03 -->
             <article class="prod reveal">
-                <span class="prod-num">03</span>
-                <div class="prod-frame"><img src="https://alightmtion.com/wp-content/uploads/2025/08/cropped-logo.webp" alt=""></div>
+                <span class="prod-num" aria-hidden="true">03</span>
+                <div class="prod-frame"><img src="https://alightmtion.com/wp-content/uploads/2025/08/cropped-logo.webp" alt="Logo am premium gratis" width="148" height="148" loading="lazy" decoding="async"></div>
                 <span class="cat">tools</span>
                 <h3>am premium gratis</h3>
                 <p>Tool editing premium yang bisa dipakai gratis. Buat kamu yang suka bikin konten tapi nggak mau keluar duit banyak.</p>
                 <div class="prod-btns">
                     <a href="https://diyymotion.vercel.app" target="_blank" class="btn btn-solid" onclick="showToast('Membuka website...')">
-                        <i class="fas fa-external-link-alt"></i> website
+                        <i class="fas fa-external-link-alt" aria-hidden="true"></i> website
                     </a>
                     <button class="btn btn-line" onclick="openModal('https://files.catbox.moe/emxe4j.jpg','bukti am premium')">
-                        <i class="fas fa-image"></i> screenshot
+                        <i class="fas fa-image" aria-hidden="true"></i> screenshot
                     </button>
                 </div>
             </article>
             <!-- 04 -->
             <article class="prod reveal">
-                <span class="prod-num">04</span>
-                <div class="prod-frame"><img src="https://files.catbox.moe/alahc5.jpeg" alt=""></div>
+                <span class="prod-num" aria-hidden="true">04</span>
+                <div class="prod-frame"><img src="https://files.catbox.moe/alahc5.jpeg" alt="Logo mio store" width="148" height="148" loading="lazy" decoding="async"></div>
                 <span class="cat">bot</span>
                 <h3>mio store</h3>
                 <p>Toko resmi produk mio dev. Chat bot, pilih produk, order — semua otomatis, nggak perlu nunggu admin online.</p>
                 <div class="prod-btns">
                     <a href="https://t.me/mio_toko_online_bot" target="_blank" class="btn btn-solid" onclick="showToast('Membuka bot...')">
-                        <i class="fab fa-telegram-plane"></i> buka bot
+                        <i class="fab fa-telegram-plane" aria-hidden="true"></i> buka bot
                     </a>
                     <button class="btn btn-line" onclick="openModal('https://files.catbox.moe/2yxrbx.jpeg','mio store bot')">
-                        <i class="fas fa-image"></i> lihat
+                        <i class="fas fa-image" aria-hidden="true"></i> lihat
                     </button>
                 </div>
             </article>
             <!-- 05 -->
             <article class="prod reveal">
-                <span class="sticker">murah ✓</span>
-                <span class="prod-num">05</span>
-                <div class="prod-frame"><img src="https://files.catbox.moe/1wjocc.jpeg" alt=""></div>
+                <span class="sticker" aria-hidden="true">murah ✓</span>
+                <span class="prod-num" aria-hidden="true">05</span>
+                <div class="prod-frame"><img src="https://files.catbox.moe/1wjocc.jpeg" alt="Logo mio cpanel" width="148" height="148" loading="lazy" decoding="async"></div>
                 <span class="cat">panel</span>
                 <h3>mio cpanel</h3>
                 <p>Panel Pterodactyl murah dengan server stabil. Cocok buat hosting bot &amp; project kamu. Habis masa aktif? Bisa diperpanjang kapan aja.</p>
                 <div class="prod-btns">
                     <a href="https://t.me/mio_cpanel_bot" target="_blank" class="btn btn-solid" onclick="showToast('Membuka bot...')">
-                        <i class="fab fa-telegram-plane"></i> order bot
+                        <i class="fab fa-telegram-plane" aria-hidden="true"></i> order bot
                     </a>
                     <button class="btn btn-line" onclick="openModal('https://files.catbox.moe/439gpy.jpeg','panel pterodactyl')">
-                        <i class="fas fa-image"></i> lihat
+                        <i class="fas fa-image" aria-hidden="true"></i> lihat
                     </button>
                 </div>
             </article>
@@ -809,8 +843,8 @@
 
     <div class="spacer"></div>
 
-    <div class="divider">
-        <svg width="140" height="10" viewBox="0 0 140 10" fill="none">
+    <div class="divider" aria-hidden="true">
+        <svg width="140" height="10" viewBox="0 0 140 10" fill="none" focusable="false">
             <path d="M2 6 Q 12 2 22 6 T 42 6 T 62 6 T 82 6 T 102 6 T 122 6 T 138 6" stroke="rgba(39,34,29,.3)" stroke-width="2.5" stroke-linecap="round"/>
         </svg>
     </div>
@@ -820,7 +854,7 @@
         <div class="sec-head">
             <div>
                 <h2>developer</h2>
-                <svg class="squig" width="92" height="8" viewBox="0 0 92 8" fill="none">
+                <svg class="squig" width="92" height="8" viewBox="0 0 92 8" fill="none" aria-hidden="true" focusable="false">
                     <path d="M2 5 Q 10 1 18 5 T 34 5 T 50 5 T 66 5 T 82 5 T 90 5" stroke="#e07856" stroke-width="2.5" stroke-linecap="round"/>
                 </svg>
             </div>
@@ -828,15 +862,14 @@
         </div>
         <div class="dev">
             <div class="dev-video-bg">
-                <video autoplay muted loop playsinline>
-                    <source src="https://files.catbox.moe/3a4zwd.mp4" type="video/mp4">
-                </video>
+                <!-- PERF: video lazy load — baru di-download saat kelihatan -->
+                <video muted loop playsinline preload="none" data-src="https://files.catbox.moe/3a4zwd.mp4" aria-hidden="true"></video>
             </div>
-            <div class="dev-video-overlay"></div>
+            <div class="dev-video-overlay" aria-hidden="true"></div>
             <div class="dev-content">
                 <div class="dev-avatar">
-                    <img src="https://files.catbox.moe/alahc5.jpeg" alt="mio dev">
-                    <span class="online-dot"></span>
+                    <img src="https://files.catbox.moe/alahc5.jpeg" alt="Foto profil mio dev" width="176" height="176" loading="lazy" decoding="async">
+                    <span class="online-dot" aria-hidden="true"></span>
                 </div>
                 <div class="dev-name">mio dev</div>
                 <div class="dev-handle">@ArisDEv</div>
@@ -847,7 +880,7 @@
                         <div class="lbl">Produk</div>
                     </div>
                     <div class="dev-stat">
-                        <div class="num">3</div>
+                        <div class="num">2</div>
                         <div class="lbl">Bot</div>
                     </div>
                     <div class="dev-stat">
@@ -856,14 +889,14 @@
                     </div>
                 </div>
                 <div class="dev-socials">
-                    <a href="https://whatsapp.com/channel/0029VbCrjmG6LwHkDpCbEi0z" target="_blank" class="dev-social-btn" title="WhatsApp">
-                        <i class="fab fa-whatsapp"></i>
+                    <a href="https://whatsapp.com/channel/0029VbCrjmG6LwHkDpCbEi0z" target="_blank" class="dev-social-btn" title="WhatsApp" aria-label="WhatsApp mio dev">
+                        <i class="fab fa-whatsapp" aria-hidden="true"></i>
                     </a>
-                    <a href="https://vt.tiktok.com/ZSVm2YLPm/" target="_blank" class="dev-social-btn" title="TikTok">
-                        <i class="fab fa-tiktok"></i>
+                    <a href="https://vt.tiktok.com/ZSVm2YLPm/" target="_blank" class="dev-social-btn" title="TikTok" aria-label="TikTok mio dev">
+                        <i class="fab fa-tiktok" aria-hidden="true"></i>
                     </a>
-                    <a href="https://chat.whatsapp.com/DHHAvScSJ0WEQIAPrH3XlF" target="_blank" class="dev-social-btn" title="Group">
-                        <i class="fas fa-users"></i>
+                    <a href="https://chat.whatsapp.com/DHHAvScSJ0WEQIAPrH3XlF" target="_blank" class="dev-social-btn" title="Group" aria-label="Group WhatsApp mio dev">
+                        <i class="fas fa-users" aria-hidden="true"></i>
                     </a>
                 </div>
             </div>
@@ -876,93 +909,120 @@
         <p class="foot-sub">© 2025 mio dev — toko kecil, semangat besar</p>
         <p class="foot-upd">halaman terakhir dicek: <span id="updateDate"></span></p>
     </footer>
+    </main>
 
     <!-- INFO MODAL -->
-    <div class="overlay" id="infoModal">
-        <span class="close-x" onclick="closeInfoModal()"><i class="fas fa-xmark"></i></span>
+    <div class="overlay" id="infoModal" role="dialog" aria-modal="true" aria-label="Informasi Mio Official">
+        <span class="close-x" onclick="closeInfoModal()" onkeydown="keyOpen(event, closeInfoModal)"
+              role="button" tabindex="0" aria-label="Tutup"><i class="fas fa-xmark" aria-hidden="true"></i></span>
         <div class="sheet">
             <span class="sheet-hello">pesan singkat dari admin 💌</span>
             <h3>Informasi Mio Official</h3>
             <div class="notice">Makasih udah mampir, semoga ketemu yang cocok!</div>
             <div class="links">
                 <div class="link-row">
-                    <i class="fab fa-whatsapp wa"></i>
+                    <i class="fab fa-whatsapp wa" aria-hidden="true"></i>
                     <a href="https://whatsapp.com/channel/0029VbCrjmG6LwHkDpCbEi0z" target="_blank">Saluran WhatsApp Mio Official ID</a>
-                    <i class="fas fa-arrow-right arr"></i>
+                    <i class="fas fa-arrow-right arr" aria-hidden="true"></i>
                 </div>
                 <div class="link-row">
-                    <i class="fab fa-tiktok tt"></i>
+                    <i class="fab fa-tiktok tt" aria-hidden="true"></i>
                     <a href="https://vt.tiktok.com/ZSVm2YLPm/" target="_blank">TikTok: @mioDev</a>
-                    <i class="fas fa-arrow-right arr"></i>
+                    <i class="fas fa-arrow-right arr" aria-hidden="true"></i>
                 </div>
                 <div class="link-row">
-                    <i class="fab fa-whatsapp wa"></i>
+                    <i class="fab fa-whatsapp wa" aria-hidden="true"></i>
                     <a href="https://chat.whatsapp.com/DHHAvScSJ0WEQIAPrH3XlF" target="_blank">Group Mio dev</a>
-                    <i class="fas fa-arrow-right arr"></i>
+                    <i class="fas fa-arrow-right arr" aria-hidden="true"></i>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- IMAGE MODAL -->
-    <div class="overlay" id="imgModal">
-        <span class="close-x" onclick="closeModal()"><i class="fas fa-xmark"></i></span>
+    <div class="overlay" id="imgModal" role="dialog" aria-modal="true" aria-label="Screenshot produk">
+        <span class="close-x" onclick="closeModal()" onkeydown="keyOpen(event, closeModal)"
+              role="button" tabindex="0" aria-label="Tutup"><i class="fas fa-xmark" aria-hidden="true"></i></span>
         <div class="photo">
-            <img src="" alt="Screenshot" id="modalImage">
+            <img src="" alt="Screenshot produk" id="modalImage" decoding="async">
             <div class="cap" id="modalCap">screenshot</div>
         </div>
     </div>
 
     <!-- NAV BAWAH -->
-    <div class="bottom-nav">
+    <nav class="bottom-nav" aria-label="Navigasi halaman">
         <div class="nav-tab active" data-target="top" onclick="goTo('top')">
-            <i class="fas fa-house"></i>
+            <i class="fas fa-house" aria-hidden="true"></i>
             <span>Home</span>
         </div>
         <div class="nav-tab" data-target="produk" onclick="goTo('produk')">
-            <i class="fas fa-box-open"></i>
+            <i class="fas fa-box-open" aria-hidden="true"></i>
             <span>Produk</span>
         </div>
         <div class="nav-tab" data-target="dev" onclick="goTo('dev')">
-            <i class="fas fa-code"></i>
+            <i class="fas fa-code" aria-hidden="true"></i>
             <span>Dev</span>
         </div>
-    </div>
+    </nav>
 
-    <div class="toast" id="toast">
-        <i class="fas fa-check-circle" style="color:#7eb89a;font-size:13px"></i>
+    <div class="toast" id="toast" role="status" aria-live="polite">
+        <i class="fas fa-check-circle" style="color:#7eb89a;font-size:13px" aria-hidden="true"></i>
         <span id="toastMsg">ok</span>
     </div>
 
     <script>
+        // ===== A11Y: aktivasi keyboard (Enter/Space) untuk elemen non-button =====
+        function keyOpen(e, fn) {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fn(); }
+        }
+
+        // ===== A11Y: Escape menutup modal =====
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') { closeModal(); closeInfoModal(); }
+        });
+
         // ===== MUSIC =====
         const audio = document.getElementById('bgMusic');
         const playIcon = document.getElementById('playIcon');
+        const playBtn = document.getElementById('playBtn');
         const playerBox = document.getElementById('playerBox');
         let isPlaying = false;
         function toggleMusic() {
             if (isPlaying) {
                 audio.pause();
                 playIcon.className = 'fas fa-play';
+                playBtn.setAttribute('aria-label', 'Putar musik');
                 playerBox.classList.remove('playing');
             } else {
                 audio.play().catch(() => {});
                 playIcon.className = 'fas fa-pause';
+                playBtn.setAttribute('aria-label', 'Jeda musik');
                 playerBox.classList.add('playing');
             }
             isPlaying = !isPlaying;
         }
 
-        // ===== VIDEO DEV (play saat kelihatan aja) =====
+        // ===== VIDEO DEV: lazy load — baru di-download saat kelihatan =====
         const devVideo = document.querySelector('.dev-video-bg video');
         const devProfile = document.querySelector('.dev');
         let videoObserved = false;
         const vidObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    if (!videoObserved) { devVideo.play().catch(() => {}); videoObserved = true; }
+                    if (!videoObserved) {
+                        if (!devVideo.querySelector('source')) {
+                            const s = document.createElement('source');
+                            s.src = devVideo.dataset.src;
+                            s.type = 'video/mp4';
+                            devVideo.appendChild(s);
+                            devVideo.load();
+                        }
+                        devVideo.play().catch(() => {});
+                        videoObserved = true;
+                    }
                 } else {
-                    devVideo.pause(); videoObserved = false;
+                    devVideo.pause();
+                    videoObserved = false;
                 }
             });
         }, { threshold: 0.2 });
@@ -987,6 +1047,7 @@
         const modalCap = document.getElementById('modalCap');
         function openModal(src, label) {
             modalImage.src = src;
+            modalImage.alt = 'Screenshot ' + (label || 'produk');
             modalCap.textContent = label || 'screenshot';
             imgModal.classList.add('show');
         }
@@ -1038,7 +1099,7 @@
             if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
-        // scroll-spy: tab aktif ngikutin posisi scroll
+        // scroll-spy
         const tabs = document.querySelectorAll('.nav-tab');
         function spy() {
             const y = window.scrollY + 220;
